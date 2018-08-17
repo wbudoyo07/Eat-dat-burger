@@ -2,11 +2,20 @@
 
 <ul>
     {{#each burgers}}
-        <li>
-            <p>{{id}}</p>
-            <p>{{burger_name}}</p>
-            <p>{{devoured}}</p>
-
-        </li>
+        {{#unless devoured}}
+            {{>burgersList/burgers-block hungry=true}}
+        {{/unless}}    
     {{/each}}
 </ul>
+
+<h2>test 2</h2>
+<ul>
+    {{#each burgers}}
+        {{#if devoured}}
+             {{> burgersList/burgers-block hungry=false}}
+        {{/if}}
+    {{/each}}
+</ul>
+
+<h3> add burger</h3>
+<form act=""></form>
