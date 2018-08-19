@@ -3,8 +3,8 @@ var connection =require("../config/connection.js");
 let orm ={
 
     selectAll:function(tableInput, cb){
-        let queryString = "SELECT * FROM ??";
-        connection.query(queryString,[tableInput], function(err, result){
+        let queryString = `SELECT * FROM ${tableInput}`;
+        connection.query(queryString, function(err, result){
             if(err) {
                 throw err; 
             }
@@ -15,20 +15,25 @@ let orm ={
         });
     },
 
-    // insertOne: function(tableInput,colToSearch,val){
-    //     let queryString = "SELECT * FROM ?? WHERE ?? = ?";
-    //     connection.query(queryString, [tableInput, colToSearch,val], function(err,result){
-    //         if(err) {
-    //             throw err;
-    //         }
-    //         console.log("from insert one");
-    //         console.log(result);
-    //     });
 
-    // },
+    insertOne: function(tableInput,burgerName, cb){
+        let queryString = `INSERT INTO ${tableInput}(burger_name, devoured) VALUES ("${burgerName}", false)`;
+        connection.query(queryString, function(err, result){
+            if(err){
+                throw err;
+            }
+            cb(result);
+        });
+    },
 
-    updateOne: function(){
-
+    updateOne: function(tableInput,id, cb){
+        let queryString =`UPDATE ${tableInput} SET devoured = true WHERE id = ${id}`;
+        connection.query(queryString, function(err,result){
+            if (err){
+                throw err;
+            }
+            cb(result);
+        });
     }
 }
 
