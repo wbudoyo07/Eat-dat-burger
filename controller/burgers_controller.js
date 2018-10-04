@@ -16,7 +16,17 @@ router.get("/", function(req,res){
   });
  
 });
-
+router.get("/api/burgers", function(req, res){
+  burger.selectAll(function(data){
+    // we need to create obj here so we can use #each method from handlebars.
+      let burgersObj = {
+          burgers: data
+      };
+      console.log(burgersObj);
+      res.json(result);
+});
+  
+});
 
 // POST
 router.post("/api/burgers", function(req, res){
